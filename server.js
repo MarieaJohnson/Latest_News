@@ -40,21 +40,6 @@ mongoose.connect(db, function(error){
   }
 });
 
-// if (process.env.MONGODB_URI) {
-//   mongoose.connect(process.env.MONGODB_URI);
-
-// } else {
-
-//   mongoose.connect(db, function (err) { //db = 'mongodb://localhost/yourdb'
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log('mongoose connection is successful on: ' + db);
-//     }
-//   });
-// }
-
-
 app.listen(PORT, function(){
   console.log("Listening on port:" + PORT);
 });
