@@ -1,10 +1,11 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var newsarticleSchema = new Schema({
-  newsarticles: {
+  headline: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    sparse: true
   },
   summary: {
     type: String,
@@ -14,6 +15,11 @@ var newsarticleSchema = new Schema({
   saved: {
     type: Boolean,
     default: false
+  },
+
+  comment: {
+    type: Schema.Types.ObjectId,
+    ref: "Comment"
   }
 });
 

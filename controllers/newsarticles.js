@@ -10,9 +10,12 @@ module.exports = {
       var newsarticles = data;
       for (var i = 0; i < newsarticles.length; i++) {
         newsarticles[i].date = makeDate();
-        articles[i].saved = false;
+        newsarticles[i].saved = false;
       }
-      newsarticles.collection.insertMany(newsarticles, { ordered: false }, function (err, docs) {
+      console.log("articles fetched: " + newsarticles.length);
+      Newsarticle.insertMany(newsarticles, function (err, docs) {
+        console.log(docs);
+        console.log(err);
         cb(err, docs);
       });
     });
@@ -21,11 +24,10 @@ module.exports = {
     Newsarticle.remove(query, cb);
   },
   get: function (query, cb) {
-    Newsarticle.find(query).sort({
-      _id: -1
-    })
-      .exec(function (err, doc) {
-        cd(doc);
+    console.log(query);
+    Newsarticle.find({},function (err, doc) {
+        console.log(doc);
+        cb(doc);
       });
   },
   update: function (query, cb) {

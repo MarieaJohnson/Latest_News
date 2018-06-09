@@ -1,7 +1,7 @@
 var scrape = require("../scripts/scrape");
 
-var newsarticleController = require("../controller/newsarticles");
-var commentsController = require("../controller/comments");
+var newsarticleController = require("../controllers/newsarticles");
+var commentsController = require("../controllers/comments");
 
 module.exports = function (router) {
   router.get("/", function (req, res) {
@@ -13,21 +13,23 @@ module.exports = function (router) {
   });
 
   router.get("/api/fetch", function (req, res) {
-    newsarticlesController.fetch(function (err, docs) {
-      if (!docs || docs.insertedCount === 0) {
+    newsarticleController.fetch(function (err, docs) {
+      console.log("hhhhhhh");
+      if (!docs || docs.length === 0) {
         res.json({
           message: "No new articles today."
         });
       }
       else {
         res.json({
-          message: "Added" + docs.insertedCount + " new articles."
+          message: "Added " + docs.length + " new articles."
         });
       }
     });
   });
   router.get("/api/newsarticles", function (req, res) {
     var query = {};
+    console.log(req.query);
     if (req.query.saved) {
       query = req.query;
     }
@@ -38,12 +40,12 @@ module.exports = function (router) {
   router.delete("/api/newsarticles/:id", function (req, res) {
     var query = {};
     query._id = req.params.id;
-    newsarticlesController.delete(query, function (err, data) {
+    newsarticleController.delete(query, function (err, data) {
       res.json(data);
     });
   });
   router.patch("/api/newsarticles", function (req, res) {
-    newsarticlesController.update(req.boy, function (err, data) {
+    newsarticleController.update(req.boy, function (err, data) {
       res.json(data);
     });
   });

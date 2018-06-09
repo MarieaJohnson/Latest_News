@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var Comment = Comment;
 var commentSchema = new Schema({
   _newsarticleId: {
       type: Schema.Types.ObjectId,

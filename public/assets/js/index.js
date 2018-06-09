@@ -1,5 +1,6 @@
+console.log("sanity");
 $(document).ready(function () {
-  var articleContainer = $(".article.container");
+  var articleContainer = $(".newsarticle-container");
   $(document).on("click", ".btn.save", handleArticleSave);
   $(document).on("click", ".scrape-new", handleArticleScrape);
 
@@ -8,7 +9,8 @@ $(document).ready(function () {
   function initPage() {
     articleContainer.empty();
     $.get("/api/newsarticles?saved=false").then(function (data) {
-      if (data && data.lentght) {
+      console.log(data);
+      if (data && data.length) {
         renderArticles(data);
       }
       else {
@@ -19,23 +21,24 @@ $(document).ready(function () {
   function renderArticles(articles) {
     var articlePanels = [];
     for (var i = 0; i < articles.length; i++) {
-      articlePanels.push(createPanel(articles[i]));
+      articleContainer.append(createPanel(articles[i]));
+      //articlePanels.push(createPanel(articles[i]));
     }
-    articleContainer.append(articlePanels);
+    //articleContainer.append(articlePanels);
   }
-  function createPanel(article) {
+  function createPanel(newsarticle) {
     var panel =
       $(["<div class = 'panel panel-default'>",
         "<div class = 'panel-heading'>",
         "<h3>",
-        article.headline, "<a class ='btn btn-success save'>",
+        newsarticle.headline, "<a class ='btn btn-success save'>",
         "Save Article", "</a>",
         "</h3>",
         "</div>",
-        "<div class = 'panel-body'>", article.summary,
+        "<div class = 'panel-body'>", newsarticle.summary,
         "</div>",
         "</div>"].join(""));
-    panel.data("_id", article._id);
+    panel.data("_id", newsarticle._id);
     return panel;
   }
 
@@ -71,7 +74,9 @@ $(document).ready(function () {
       });
   }
   function handleArticleScrape() {
+    console.log("Button Click is working")
     $.get("/api/fetch").then(function (data) {
+      console.log(data);
       initPage();
       bootbox.alert("<h3 class = 'test-center m-top-80'>" + data.message + "<h3>");
     });

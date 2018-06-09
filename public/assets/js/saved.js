@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var articleContainer = $(".article-container");
+  var articleContainer = $(".newsarticle-container");
 
   $(document).on("click", ".btn.delete", handleArticleDelete);
   $(document).on("click", ".btn.comments", handleArticleComments);
@@ -25,12 +25,12 @@ $(document).ready(function () {
     }
     articleContainer.append(articlePanels);
   }
-  function createPanel(article) {
+  function createPanel(newsarticle) {
     var panel =
       $(["<div class = 'panel-default'>",
         "<div class = 'panel-heading'>",
         "<h3>",
-        article.headline,
+        newsarticle.headline,
         "<a class = 'btn btn-danger delete'>",
         "Delete from Saved",
         "</a>",
@@ -39,11 +39,11 @@ $(document).ready(function () {
         "</h3>",
         "</div>",
         "<div class = 'panel-body'>",
-        article.summary,
+        newsarticle.summary,
         "</div>",
         "</div>"].join(""));
 
-    panel.data("_id", article._id);
+    panel.data("_id", newsarticle._id);
     return panel;
   }
   function renderEmpty() {
@@ -117,7 +117,7 @@ $(document).ready(function () {
         _id: currentArticle._id,
         comments: data || []
       };
-      $(".btn.save").data("article", commentData);
+      $(".btn.save").data("newsarticle", commentData);
 
       renderCommentList(commentData);
     });

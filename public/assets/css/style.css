@@ -22,6 +22,8 @@ body {
 
 .jumbotron {
   position: relative;
+  /* background-color: white;
+  opacity: 0.5;  */
   width: 100%;
   height: 500px;
   font-family: 'Cormorant SC', serif;
