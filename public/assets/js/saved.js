@@ -1,3 +1,4 @@
+console.log("sanity saved");
 $(document).ready(function () {
   var articleContainer = $(".newsarticle-container");
 

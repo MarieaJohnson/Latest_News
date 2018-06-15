@@ -1,6 +1,7 @@
-console.log("sanity");
+console.log("sanity index");
 $(document).ready(function () {
   var articleContainer = $(".newsarticle-container");
+
   $(document).on("click", ".btn.save", handleArticleSave);
   $(document).on("click", ".scrape-new", handleArticleScrape);
 
@@ -12,16 +13,16 @@ $(document).ready(function () {
       console.log(data);
       if (data && data.length) {
         renderArticles(data);
-      }
-      else {
+      } else {
         renderEmpty();
       }
     });
   }
   function renderArticles(articles) {
     var articlePanels = [];
-    for (var i = 0; i < articles.length; i++) {
-      articleContainer.append(createPanel(articles[i]));
+
+    for (var i = 0; i < newsarticles.length; i++) {
+      articleContainer.append(createPanel(newsarticles[i]));
       //articlePanels.push(createPanel(articles[i]));
     }
     //articleContainer.append(articlePanels);
